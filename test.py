@@ -1,18 +1,13 @@
-import openai
-
-def check_openai_api_key(api_key):
-    client = openai.OpenAI(api_key=api_key)
-    try:
-        client.models.list()
-    except openai.AuthenticationError:
-        return False
-    else:
-        return True
-
-
-OPENAI_API_KEY ="sk-69696969966969696969966996"
-
-if check_openai_api_key(OPENAI_API_KEY):
-    print("Valid OpenAI API key.")
+import torch
+tensor = torch.ones(4, 4,dtype=torch.int)
+print(tensor)
+print('First row: ',tensor[0])
+print('First column: ', tensor[:, 0])
+print('Last column:', tensor[..., -1])
+tensor[:,1] = 0
+print(tensor)
+if torch.cuda.is_available():
+  tensor = tensor.to('cuda')
+  print("cuda")
 else:
-    print("Invalid OpenAI API key.")
+    print("Not")
